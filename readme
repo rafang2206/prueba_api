@@ -1,0 +1,144 @@
+# Nombre del Proyecto
+
+Breve descripción del proyecto.
+
+## Comenzando
+
+Estas instrucciones te ayudarán a configurar y ejecutar el proyecto en tu máquina local para propósitos de desarrollo y pruebas.
+
+### Prerrequisitos
+
+Asegúrate de tener instalados los siguientes programas:
+
+- Node.js
+- npm
+
+### Instalación
+
+Sigue estos pasos para instalar y configurar el proyecto:
+
+1. Clona el repositorio: `git clone http://gitcccccc`
+2. Navega al directorio del proyecto: `cd api`
+3. Instala las dependencias: `npm install`
+
+### Configuración
+
+crea un archivo .env y configura las siguientes parametros de entorno en el sistema:
+
+# parametros DE PUERTO Y JWT SECRET
+PORT=
+JWT_SECRET=
+
+# DATOS SMTP correo electronico
+HOST=
+MAIL_PORT=
+USER=
+PASS=
+
+# URL DEL FRONTEND
+FRONTEND_URL=
+
+# DB MYSQL
+DB_HOST=
+DB_USER=
+DB_PASS=
+
+
+### Uso
+
+El proyecto cuenta con diferentes end points para el funcionamiento del sistema, a continuación se detallan
+las rutas y sus usos:
+
+
+# RUTAS DE LOGIN, REGISTRO Y AUTENTICACIÓN:
+
+metodo POST api/auth/login  "esta ruta recibe mediante formato Json del body las parametros email (requerido) tipo String debe ser un Email y password (requerido) tipo String"
+
+metodo POST api/auth/register "esta ruta recibe mediante formato Json del body las parametros  email tipo String (requerido) debe ser un Email, password (requerido) tipo String y nombre (requerido) tipo String"
+
+metodo GET api/auth/comprobar-token/:id "esta ruta recibe el parametro del token enviado al correo electronico una vez que la persona valide su correo y haga click en la url enviada"
+
+
+# RUTAS DE USUARIO
+
+METODO GET api/users/profile header Token Bearer "esta ruta envia mediante metodo get el token bearer
+desde el front end al back end, para de esta manera suministrar la información del usuario que inicie sesión
+para uso del contenxto global de la aplicación"
+
+METODO PUT api/users/profile header Token Bearer "parametros a recibir direccion y archivo tipo imagen con el name del input imagenProfile, mediante esta ruta se edita la información de direccion y foto de perfil del usuario";
+
+# RUTAS DE PRODUCTOS
+
+METODO GET /api/products header Token Bearer "mediante esta ruta se obtienen todos los productos registrados en la base de datos"
+
+METODO POST /api/products/agregar-producto header Token Bearer "mediante esta ruta se agregan los productos a la base de datos, requiere los siguientes parametros: 
+        precio (requerido) tipo int
+        codigo (requerido) tipo String, en esta se indica el codigo del producto o en su defecto codigo ISBN DEL LIBRO
+        cantidad (requerido) tipo int
+        categoria (requerido) tipo int
+        autor tipo STRING
+        distribuidor (requerido) tipo STRING
+
+METODO PUT /api/products/actualizar-producto/:id header Token Bearer "mediante esta ruta se envia el id del producto mediante params y se envia el parametro cantidad (requerido) tipo INT para actualizar el valor de las cantidades disponibles del producto"
+
+METODO POST /api/products/agreagar-carrito/:id header Token Bearer "mediante esta ruta se envia el id del producto mediante params para agregar el producto al carrito del cliente"
+
+METODO POST /api/products/comprar-producto/:id header Token Bearer "mediante esta ruta se envia el id del producto mediante params y se envia el parametro cantidad (requerido) tipo INT para realizar la compra de un producto el cual se inserta en la tabla operaciones, para llevar el registro de las compras efectuadas por los usuarios"
+
+METODO GET /api/products/categorias header Token Bearer "mediante esta url se obtienen las categorias de existentes en la plataforma, el id de estas categorias se relacionan con el campo categoria de la tabla productos, para de esta manera permitir agregar otro tipo de productos diferentes a libros en un futuro"
+
+METODO POST /api/products/agregar-categoria header Token Bearer "mediante esta url se agregan nuevas categorias al sistema, requiere los siguientes parametros: categoria (requerido) tipo String"
+
+
+METODO GET /api/products/categoria/:id header Token Bearer "mediante esta ruta se envia el id de la categoria mediante params, y se obtiene la información de dicha categoria"
+
+METODO PUT /api/products/categoria/:id header Token Bearer  "mediante esta ruta se envia el id de la categoria mediante params y se envia mediante el body el parametro categoria (requerido) tipo String", para actualizar el nombre de la categoria"
+
+
+OBSERVACIÓN: LOS USUARIOS CREADOS SE CREAN CON EL ROL NUMERO 2 EN LA BASE DE DATOS Y NO TIENEN PERMITIDO 
+REALIZAR MODIFICACIONES, SOLO USUARIOS TIPO 1 (ADMIN) PUEDEN REALIZAR ESTAS ACCIONES
+
+### Estructura del Proyecto
+
+El proyecto se encuentra estructurado de la siguiente manera;
+
+# ARCHIVO APP.JS
+en donde iniciamos el servidor, y sus configuraciones generales.
+
+# CARPETA SRC
+en dicha carpeta encontramos todos las carpetas necesarias para la funcionalidad de nuestra RestFull Api
+
+# CARPETA CONFIG
+en esta carpeta se encuentra el archivo config.js para la configuración de nuestra base de datos
+
+# CARPETA CONTROLLERS
+en esta carpeta encontramos los archivos de los controladores utilizados en las rutas, y en donde se encuentran las funciones generales de la api.
+
+# CARPETA MIDDLEWARES
+en dicha carpeta encontramos dos middlewares necesarios y requeridos por la api en las diferentes rutas, como son el authMiddleware para la verificación del jwt del cliente, y el middleware upload, para subir los archivos de imagenes para los perfiles de los usuarios.
+
+# CARPETA MODELS
+en esta carpeta se encuentran los modelos de las diferentes tablas de nuestra base de datos
+
+# CARPETA ROUTES
+en dicha carpeta se encuentran todos los archivos en donde se indican las rutas a utilzar por nuestra API
+
+# CARPETA SCHEMAS
+en dicha carpeta se encuentan las funciones necesarias para realizar la validación de todos los parametros que reciben nuestras rutas, para evitar inserción de información no deseada, para esto se utilizo una libreria llamada zod que nos permite realizar esto de manera simple, dinamica, eficiente y limpia
+
+# CARPETA UPLOADS
+en dicha carpeta se guardan las imagenes de perfil de los usuarios subidas
+
+LAS IMAGENES PODRAN OBTENERSE MEDIANTE LA url http://localhost:4040/static/${nombre de la imagen}
+
+# CARPETA UTILS
+en esta carpeta encontramos diferentes funcionalidades requeridas en ciertas areas, tales como hash de password, comprobacion de password, directorios de carpetas, generacion de jwt, envio de emails.
+
+### Autor
+
+Rafael Arias Torres - Desarrollador de software
+
+
+## Agradecimientos
+
+Muchas gracias por todo...
