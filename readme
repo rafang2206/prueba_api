@@ -17,9 +17,11 @@ Asegúrate de tener instalados los siguientes programas:
 
 Sigue estos pasos para instalar y configurar el proyecto:
 
-1. Clona el repositorio: `git clone http://gitcccccc`
-2. Navega al directorio del proyecto: `cd api`
+1. Clona el repositorio: `git clone https://github.com/rafang2206/prueba_api`
+2. Navega al directorio del proyecto: `cd nombre de la carpeta`
 3. Instala las dependencias: `npm install`
+4. Prueba los test: `npm run test`
+5. Ejecuta la aplicación: `npm run start`
 
 ### Configuración
 
